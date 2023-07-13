@@ -1,0 +1,63 @@
+// errors
+.field_with_errors {
+  position: relative;
+  padding-top: 40px;
+
+  .error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6px 5px;
+    background: $c-error-bg;
+    color: $c-error-content;
+    font-size: 12px;
+    overflow: visible;
+
+    &:before {
+      @include icon-stuff;
+      content: fae-icon(alert);
+      padding-right: 10px;
+    }
+
+    &:after {
+      @include right-triangle(10px, $c-error-bg);
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+    }
+  }
+
+  &.hidden_errors {
+    margin-bottom: 20px;
+
+    .error:after {
+      display: none;
+    }
+  }
+}
+
+.input {
+  .invalid {
+    border: 1px solid $c-error-content;
+  }
+}
+
+.counter {
+  + .editor-toolbar {
+    margin-top: 10px;
+  }
+
+  p {
+    color: $c-darker-grey;
+    font-style: italic;
+    padding-top: 8px;
+    font-size: 13px;
+
+    span {
+      &.overCount {
+        color: $c-error-content;
+      }
+    }
+  }
+}

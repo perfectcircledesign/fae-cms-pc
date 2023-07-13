@@ -1,0 +1,11 @@
+<%= simple_form_for([:admin, @item]) do |f| %>
+  <%= render 'fae/shared/form_header', header: @klass_name, f: f, item: @item %>
+
+  <section class="content">
+    <%= f.input :score %>
+    <%= f.input :publication %>
+    <%= fae_datepicker f, :publication_date %>
+    <%= fae_file_form f, :pdf %>
+    <%= fae_input f, :description, markdown: true %>
+  </section>
+<% end %>

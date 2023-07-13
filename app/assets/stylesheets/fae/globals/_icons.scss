@@ -1,0 +1,15 @@
+[class^="icon-"], [class*=" icon-"] {
+  @include icon-stuff;
+}
+
+// Adding more? Use this handy find/replace regex
+// \.icon\-([\w\-]+):before \{\n\s*content:\s\"\\([\w\d]+)\";\n\}
+// '$1': '$2',
+
+.icon {
+  @each $icon in $fae-required-icons {
+    &-#{nth($icon, 1)}:before {
+      content: fae-icon(nth($icon, 1));
+    }
+  }
+}

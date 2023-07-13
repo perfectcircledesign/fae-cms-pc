@@ -1,0 +1,109 @@
+ruby:
+  form_options = {
+    html: {
+      data: {
+        form_manager_model: @item.fae_form_manager_model_name,
+        form_manager_info: (@form_manager.present? ? @form_manager.to_json : nil)
+      }
+    }
+  }
+= simple_form_for([:admin, @item], form_options) do |f|
+  - subnav_array = ['Attributes', 'Assets', 'Associations']
+  - subnav_array.concat ['Aromas', 'Release Notes', 'Recent Changes'] if params[:action] == 'edit'
+  = render 'fae/shared/form_header', header: @klass_name, f: f, item: @item, cloneable: true, subnav: subnav_array, languages: true
+
+  section.content#attributes
+    = fae_input f, :name,
+      input_class: 'slugger'
+
+    = fae_input f, :vintage,
+      input_class: 'slugger',
+      helper_text: 'text input',
+      hint: '<h4>Normal Hint</h4><p>Yes, HTML is allowed</p>'.html_safe
+
+    = fae_input f, :slug, show_form_manager: false, helper_text: 'This field is ignored by the form manager at the developer level'
+
+    = fae_input f, :is_something
+
+    = fae_input f, :seo_title
+
+    = fae_input f, :seo_description
+
+    = fae_input f, :intro, helper_text: 'texterea', markdown: true
+
+    = fae_input f, :body,
+      label: 'Body Content',
+      wrapper_class: 'release_body-text_area--wrapper',
+      input_class: 'release_body-text_area',
+      helper_text: 'textarea',
+      markdown_supported: true
+
+    = fae_input f, :description, helper_text: 'texterea', markdown: true
+
+    = fae_input f, :content, helper_text: 'texterea', html: true
+
+    = fae_prefix f, :price, helper_text: 'prefix', prefix: '$', placeholder: '50.00'
+
+    = fae_suffix f, :weight, helper_text: 'suffix', suffix: 'lbs'
+
+    = fae_video_url f, :video_url, helper_text: "video url (default helper: Please enter your YouTube video ID. The video ID is between v= and & of the video's url. This is typically 11 characters long.)"
+
+    = fae_checkbox f, :featured, helper_text: 'checkbox'
+
+    = fae_radio f, :on_stage, helper_text: 'radio vertical'
+
+    = fae_radio f, :on_prod, type: 'inline', input_class: 'something', helper_text: 'radio Horizontal'
+
+    = fae_datepicker f, :release_date, helper_text: 'datepicker'
+
+    = fae_daterange f, [:show, :hide], label: 'Show/Hide', helper_text: 'daterange'
+
+    = fae_color_picker f, :color
+
+    = fae_input f, :created_at, as: :hidden
+
+  section.content#assets
+    h2 Assets
+    = fae_image_form f, :bottle_shot, helper_text: 'image form (w/ alt)'
+
+    = fae_image_form f, :hero_image, helper_text: 'image form (w/ alt and caption)', show_caption: true
+
+    = fae_file_form f, :label_pdf, helper_text: 'file form'
+
+  section.content#associations
+    h2 Associations
+    = fae_association f, :varietal, helper_text: 'pulldown', input_class: 'slugger'
+
+    = fae_pulldown f, :wine, size: 'short', helper_text: 'pulldown short', collection: Wine.order(:name_en), label_method: :name_en
+
+    = fae_multiselect f, :acclaims, label_method: :publication, helper_text: 'multiselect with a long helper description to ensure that the multiselect actions can coexist peacefully'
+
+    = fae_multiselect f, :selling_points, two_pane: true, helper_text: 'two-pane mutliselect'
+
+    = fae_checkbox f, :events, helper_text: 'checkboxes vertical', type: 'inline'
+
+- if params[:action] == 'edit'
+  section.content#aromas
+    = render 'fae/shared/nested_table',
+      assoc: :aromas,
+      parent_item: @item,
+      cols: [{ attr: :name, title: 'Pew Pew' }, :live, :image, { attr: :cat_size, title: 'Kitten Count' }],
+      ordered: true,
+      header: 'Aromas (nested table)'
+
+  section.content#release_notes
+    = render 'fae/shared/nested_table',
+      assoc: :release_notes,
+      parent_item: @item,
+      cols: [:title, :body],
+      ordered: true,
+      hide_delete_button: true,
+      header: 'Release Notes'
+
+  section.content#poly_things
+    = render 'fae/shared/nested_table',
+      assoc: :poly_things,
+      parent_item: @item,
+      cols: [:name]
+
+= render 'fae/shared/recent_changes'

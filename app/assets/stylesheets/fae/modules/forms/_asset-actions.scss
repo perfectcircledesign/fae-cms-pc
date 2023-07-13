@@ -1,0 +1,83 @@
+.asset-actions {
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  min-width: 223px;
+  max-width: 515px;
+  padding: 5px 5px 4px 5px;
+  border: 1px solid $c-border;
+  background: $c-white;
+  font-size: 13px;
+  border-radius: 2px;
+
+  &.active {
+    background: $c-white;
+  }
+
+  &.-files {
+    a {
+      padding-top: 9px;
+      padding-bottom: 9px;
+    }
+  }
+
+  > img {
+    max-width: 20%;
+    max-height: 150px;
+    margin-right: 20px;
+    cursor: pointer;
+    float: left;
+    display: block;
+  }
+
+  a {
+    padding: 6px;
+    display: inline-block;
+  }
+
+  span {
+    @include transition(color .2s);
+    color: $c-text-sub;
+  }
+
+  .button {
+    display: inline-block;
+    margin-right: 10px;
+
+    &:focus {
+      border-color: $c-focus-border;
+      outline: 0;
+    }
+
+    span {
+      padding-right: 30px;
+    }
+  }
+}
+
+.asset-delete {
+  @include transition(color 0.2s);
+  float: right;
+  display: none;
+  color: $c-darker-grey;
+
+  &:before {
+    @include icon-stuff;
+    content: fae-icon(trash);
+  }
+
+  &:hover {
+    color: $c-mid-dark-grey;
+  }
+
+  .active & {
+    display: block;
+  }
+}
+
+.asset-title {
+  display: inline-block;
+  width: 70%;
+  padding: 10px 7px 0 0;
+  color: $c-darkest-grey;
+}

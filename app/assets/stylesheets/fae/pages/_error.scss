@@ -1,0 +1,35 @@
+.error-page {
+  background-image: image-url('fae/error_bg.jpg');
+  padding-top: 100px;
+
+  section {
+    margin: 0 auto;
+    max-width: 700px;
+    min-width: 235px;
+    height: 330px;
+    padding: 35px;
+    border-top: 8px solid var(--highlight-color);
+    border-radius: 4px;
+    background: white;
+    color: $c-mid-dark-grey;
+    line-height: 1.5;
+    font-size: 13px;
+    box-shadow: 0 3px 8px 0 $c-mid-grey;
+
+    p {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.sad_face {
+  background: image-url('fae/error_sad_face.png');
+  margin: 40px auto 0;
+  width: 56px;
+  height: 56px;
+}

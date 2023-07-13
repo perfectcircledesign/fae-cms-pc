@@ -1,0 +1,43 @@
+= simple_form_for([:admin, @item], html: { 'data-form-manager-model' => @item.class.name, 'data-form-manager-info' => (@form_manager.present? ? @form_manager.to_json : nil) }) do |f|
+  == render 'fae/shared/form_header', header: @klass_name, languages: true
+
+  main.content
+    = fae_input f, :name_en, wrapper_html: { data: { test: 'do not overwrite me' } }, wrapper_class: 'test-class'
+    = fae_input f, :name_zh
+    = fae_input f, :name_ja
+    = fae_input f, :description_en
+    = fae_input f, :description_zh
+    = fae_input f, :description_ja
+    = fae_input f, :food_pairing_en
+    = fae_input f, :food_pairing_zh
+    = fae_input f, :food_pairing_ja
+    // need for testing
+    = fae_association f, :releases
+
+- if params[:action] == 'edit'
+  section.content#oregon_winemakers_section
+    = render 'fae/shared/nested_table',
+      assoc: :oregon_winemakers,
+      assoc_name: 'winemakers',
+      assoc_name_singular: 'winemaker',
+      parent_item: @item,
+      cols: [:name, :winemaker_image, :table_image],
+      new_path: "/admin/winemakers/new?region_type=1",
+      ordered: true,
+      edit_column: true,
+      header: 'Oregon Winemaker',
+      title: 'Oregon Winemakers'
+
+  section.content#california_winemakers_section
+    = render 'fae/shared/nested_table',
+      assoc: :california_winemakers,
+      assoc_name: 'winemakers',
+      assoc_name_singular: 'winemaker',
+      parent_item: @item,
+      cols: [:name, :winemaker_image, :table_image],
+      new_path: "/admin/winemakers/new?region_type=2",
+      ordered: true,
+      edit_column: true,
+      header: 'California Winemaker',
+      title: 'California Winemakers'
+

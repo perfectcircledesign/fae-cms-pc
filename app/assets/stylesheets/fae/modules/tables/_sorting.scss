@@ -1,0 +1,58 @@
+.th-sortable-handle {
+  width: 25px;
+  padding: 0;
+}
+
+.sortable-handle {
+  padding-right: 5px;
+  color: $c-text-sub;
+  cursor: pointer;
+}
+
+// tablesorter classes
+th {
+  &:not(.sorter-false) {
+    cursor: pointer;
+
+    .tablesorter-header-inner,
+    .th-sortable-title {
+      &:after {
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &.tablesorter-headerAsc,
+    &.tablesorter-headerDesc,
+    &.-desc,
+    &.-asc {
+      .tablesorter-header-inner,
+      .th-sortable-title {
+        &:after {
+          color: $c-darkest-grey;
+        }
+      }
+    }
+  }
+}
+
+.tablesorter-header-inner,
+.th-sortable-title {
+  &:after {
+    @include icon-stuff;
+    content: fae-icon(arrow_down);
+    display: none;
+    font-size: 4px;
+    position: relative;
+    top: -3px;
+    left: 6px;
+    color: $c-darker-grey;
+  }
+}
+
+th.-asc .th-sortable-title,
+.tablesorter-headerAsc .tablesorter-header-inner {
+  &:after {
+    content: fae-icon(arrow_up);
+  }
+}

@@ -1,0 +1,40 @@
+.markdown-support {
+  position: relative;
+  display: inline-block;
+  padding-left: 7px;
+  cursor: pointer;
+  color: var(--highlight-color);
+
+  &:after {
+    @include icon-stuff;
+    content: fae-icon(support);
+    position: absolute;
+    padding-left: 7px;
+    text-decoration: none;
+    top: 1px;
+    right: -20px;
+  }
+}
+
+.hint,
+.markdown-hint {
+  display: none;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.youtube-hint {
+  width: 530px;
+  height: 300px;
+  background-image: image-url('fae/youtube_helper.jpg');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.markdown-hint-wrapper {
+  overflow-y: scroll;
+  height: 100%;
+}

@@ -1,0 +1,88 @@
+//////////////////////////////
+// FINE Functions
+//////////////////////////////
+
+// Return a negative integer of the supplied value
+@function negate($integer) {
+  @if $integer > 0 {
+    @return 0 - $integer;
+  } @else {
+    @return $integer;
+  }
+}
+
+// Z-index function: comma-separated list and item taken
+// http://www.smashingmagazine.com/2014/06/12/sassy-z-index-management-for-complex-layouts/
+@function z($list, $element) {
+  $z-index: index($list, $element);
+
+  @if $z-index {
+    @return $z-index;
+  }
+
+  @warn "There is no item '#{$element}' in this list; choose one of: #{$list}";
+  @return null;
+}
+
+// Taken from Foundation
+@function emCalc($pxWidth) {
+  @return $pxWidth / $em-base * 1em;
+}
+
+@function remCalc($pxWidth) {
+  @return $pxWidth / $em-base * 1rem;
+}
+
+// Helper for finding value in a faux sass hash -- i.e. a list
+// http://hugogiraudel.com/2013/08/12/sass-functions/
+@function match($collection, $value) {
+  @each $item in $collection {
+    $index: index($item, $value);
+    @if $index {
+      $return: if($index == 1, 2, $index);
+      @return nth($item, $return);
+    }
+  }
+  @return false;
+}
+
+// Grabs a key from $list
+// @param {key} $key - Key to get value from $list map
+// @return - Value of key
+@function mapperize($list, $key) {
+  @if map-has-key($list, $key) {
+    @return map-get($list, $key);
+  } @else {
+    @warn "#{$key} was not found";
+    @return null;
+  }
+}
+
+@function gray($key: 30) {
+  @return mapperize($grays, $key);
+}
+
+@function fae-icon($key: 'home') {
+  $icon-code: mapperize($fae-required-icons, $key);
+  // Unicode chars are escaped; instead of using a slash in the map,
+  //   we add the slash here
+  // https://github.com/sass/sass/issues/659#issuecomment-64818741
+  @return unquote("\"\\#{$icon-code}\"");
+}
+
+// Choose from a light or dark contrasting foreground color given a background
+// Original function: https://medium.com/@mkel23/calculating-color-contrast-with-sass-eff39ef23f96
+@function pickForegroundColor($background, $c-light, $c-dark) {
+  $r: red($background);
+  $g: green($background);
+  $b: blue($background);
+
+  $yiq: (($r*299)+($g*587)+($b*114))/1000;
+
+  @if ($yiq >= 170) {
+    @return $c-dark; // Dark foreground
+  }
+  @else {
+    @return $c-light; // Light foreground
+  }
+}

@@ -1,0 +1,8 @@
+= simple_form_for([:admin, @parent_item, @item]) do |f|
+  == render 'fae/shared/form_header', header: "New #{@parent_item.name} Player"
+
+  section.content
+    = fae_input f, :first_name
+    = fae_input f, :last_name
+    = fae_input f, :number
+    = fae_input f, :bio

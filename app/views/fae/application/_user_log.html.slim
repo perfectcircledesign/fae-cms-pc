@@ -1,0 +1,36 @@
+- if false # disable user log due to performance issues
+  - unless params[:action] === 'new'
+    main.content#user_log_section
+      h2 User Log
+      table
+        thead
+          tr
+            th Session
+            th User
+            th Modified
+        tbody
+          - if item.versions.present?
+
+            - compared_attributes = item.attributes
+            - item.versions.reverse.each do |version|
+              ruby:
+                changed = []
+                if version.event === 'create'
+                  changed << "created"
+                else
+                  excluded = ['updated_at']
+                  compared_attributes.each do |attribute, value|
+                    changed.push(attribute) unless excluded.include?(attribute) || value.to_s == PaperTrail.serializer.load(version.object)[attribute].to_s
+                  end
+                  compared_attributes = PaperTrail.serializer.load(version.object)
+                end
+
+              - if changed.present?
+                tr
+                  td = version.created_at
+                  td = version.user.present? ? version.user.full_name : content_tag(:em, t('fae.application.user_absent'))
+                  td = changed.join(', ')
+
+          - else
+            tr
+              td colspan="3" = t('fae.application.no_logs')

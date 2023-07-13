@@ -1,0 +1,318 @@
+// Select box and Chosen
+.select,
+.time,
+.city_time_zone,
+.table-filter-area,
+.content-header-select,
+.date {
+
+  select {
+    min-width: 300px;
+
+    &.small_pulldown {
+      min-width: 150px;
+    }
+  }
+}
+
+.chosen-container {
+  font-size: 14px;
+
+  .chosen-results {
+    max-height: 200px;
+
+    li {
+      &.highlighted {
+        background: $c-lightest-grey;
+      }
+    }
+  }
+
+  &.chosen-drop-up .chosen-drop {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: -1px;
+    border-top: 1px solid $c-focus-border;
+    border-bottom: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+.chosen-container-active {
+  .chosen-single {
+    border-color: $c-focus-border;
+    background: $c-chosen-gradient-end;
+  }
+}
+
+.chosen-container-single {
+  .chosen-single {
+    @include gradient-vertical($start-color: $c-chosen-gradient-start, $end-color: $c-chosen-gradient-end);
+    height: auto;
+    padding: 7px 15px;
+    border-radius: 2px;
+    box-shadow: none;
+    border-color: $c-mid-grey;
+
+    div b {
+      margin-top: 7px;
+    }
+  }
+
+  .chosen-default {
+    color: $c-text-heavy;
+  }
+}
+
+.chosen-container-multi {
+  max-width: 515px;
+  min-width: 223px;
+
+  // overriding the inline js chosen makes
+  width: 100% !important;
+
+  &.chosen-container-active {
+    .chosen-choices {
+      box-shadow: none;
+    }
+  }
+
+  .chosen-choices {
+    padding: 5px;
+    border: 1px solid $c-border;
+    background: $c-white;
+
+    .li.search-field input[type="text"] {
+      height: auto;
+    }
+
+    li.search-choice {
+      padding: 5px 22px 5px 10px;
+      border: 0;
+      font-size: 12px;
+      background: $c-chosen-multi-bg;
+      color: $c-chosen-multi-text;
+
+      .search-choice-close {
+        background: none;
+        background-attachment: fixed;
+        top: 6px;
+        font-size: 10px;
+        color: $c-chosen-multi-delete;
+
+        &:after {
+          @include icon-stuff;
+          content: fae-icon(delete_x);
+        }
+      }
+    }
+
+    li.search-field {
+      input[type="text"] {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.chosen-container-single.chosen-container-active,
+.chosen-container-multi.chosen-container-active {
+  .chosen-single,
+  .chosen-choices {
+    border-color: $c-focus-border;
+  }
+}
+
+.chosen-container-multi.chosen-with-drop:not(.chosen-drop-up) {
+  .chosen-choices {
+    border-bottom: none;
+  }
+}
+
+.multiselect-action_wrap {
+  font-size: 13px;
+  line-height: 1.3;
+  margin-top: 10px;
+
+  .multiselect-action {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    padding-right: 13px;
+    border-right: 1px solid $c-mid-grey;
+
+    &:last-of-type {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+}
+
+// special for time
+.time select {
+  min-width: 75px;
+}
+
+.select-no_search {
+  .chosen-container .chosen-results {
+    padding-top: 5px;
+  }
+
+  .chosen-search {
+    position: absolute;
+    left: -9999px;
+  }
+}
+
+// special for hte table filters since they be small
+.table-filter-area {
+
+  .chosen-container {
+    font-size: 12px;
+  }
+
+  select {
+    min-width: 200px;
+  }
+
+  .chosen-container-single .chosen-single {
+    padding: 0px 15px;
+
+    div b {
+      margin-top: 1px;
+    }
+  }
+}
+
+.chosen-container {
+  .chosen-drop {
+    border-color: $c-focus-border;
+  }
+}
+
+// MultiSelect plugin for multiselect pagination-ellipsis
+.ms-container {
+  width: 700px;
+
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    min-height: 0;
+    visibility: hidden;
+  }
+
+  .ms-selectable,
+  .ms-selection {
+    float: left;
+    width: 50%;
+    height: 250px;
+    padding-right: 15px;
+    background: $c-lightest-grey;
+    color: $c-text-heavy;
+
+    li {
+      &.ms-elem-selectable,
+      &.ms-elem-selection {
+        position: relative;
+        padding: 10px 15px;
+        border-bottom: 1px $c-near-white solid;
+        border-right: 1px $c-near-white solid;
+        color: $c-text;
+        font-size: 13px;
+
+        &:after {
+          position: absolute;
+          right: 15px;
+          top: 9px;
+          color: var(--highlight-color);
+        }
+      }
+
+      &.ms-elem-selectable {
+        &:after {
+          content: "Add";
+        }
+      }
+
+      &.ms-hover {
+        cursor: pointer;
+        text-decoration: none;
+        background-color: $c-near-white;
+      }
+
+      &.disabled {
+        color: $c-near-white;
+        cursor: text;
+      }
+    }
+
+    .custom-header {
+      padding: 10px 15px;
+      margin-right: -15px;
+      color: $c-text-heavy;
+      background: $c-grey;
+      font-size: 14px;
+    }
+  }
+
+  .ms-selectable {
+    li {
+      &.ms-elem-selectable {
+        padding-right: 45px
+      }
+    }
+  }
+
+  .ms-selection {
+    float: right;
+
+    li {
+      &.ms-elem-selection {
+        padding-right: 30px;
+        padding-left: 35px;
+
+        &:before,
+        &:after {
+          @include icon-stuff;
+        }
+
+        &:after {
+          content: fae-icon(delete_x);
+          color: $c-text-sub;
+        }
+
+        &:before {
+          content: fae-icon(check);
+          padding-right: 5px;
+          margin-left: -19px;
+          color: var(--highlight-color);
+        }
+      }
+
+      .custom-header {
+        background: $c-darker-grey;
+      }
+    }
+  }
+
+  .ms-list {
+    position: relative;
+    height: 100%;
+    height: calc(100% - 34px);
+    background: $c-white;
+    overflow-y: auto;
+
+    &.ms-focus {
+      outline: 0;
+      border-bottom: 4px solid $c-focus-border;
+    }
+  }
+
+  .ms-optgroup-container {
+    width: 100%;
+  }
+}

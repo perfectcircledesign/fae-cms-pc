@@ -1,0 +1,53 @@
+.main-content {
+  position: relative;
+  min-height: 100%;
+
+  @include bp(large) {
+    min-height: calc(100% - 90px); // roughly the size of the header
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: $sidenav-width - 10px;
+    top: 0;
+    width: 10px;
+    height: 100%;
+  }
+}
+
+.content {
+  padding: 30px $content-buffer;
+  padding-bottom: 0;
+  display: block; // IE, Safari don't treat <main> as a block element
+
+  &.-bottom-shim {
+    padding-bottom: 150px;
+  }
+
+  h2 {
+    padding: 17px $content-buffer;
+    color: var(--foreground-color);
+    background: var(--highlight-color);
+    border-top: 1px solid $c-border;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: .2em;
+    margin: 0 0 30px;
+  }
+
+  h3 {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    color: $c-text-heavy;
+    margin-bottom: 20px;
+  }
+}
+
+p {
+  margin-bottom: 1.3em;
+  max-width: 80%;
+  line-height: 1.2em;
+}

@@ -1,0 +1,5 @@
+= render 'fae/shared/nested_table',
+  assoc: :aromas,
+  parent_item: @parent_item,
+  cols: [{ attr: :name, title: 'Pew Pew' }, :live, :image, { attr: :cat_size, title: 'Kitten Count' }],
+  ordered: true

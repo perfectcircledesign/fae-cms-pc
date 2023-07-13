@@ -1,0 +1,62 @@
+@include placeholder {
+  color: $c-darker-grey;
+}
+
+.input {
+  &.url,
+  &.text,
+  &.email,
+  &.string,
+  &.tel,
+  &.text,
+  &.select,
+  > .label {
+    max-width: 515px;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  &.string {
+    min-width: 223px;
+  }
+}
+
+.symbol {
+  position: relative;
+  width: 240px;
+
+  input {
+    width: 100%;
+  }
+
+  &.symbol--prefix input {
+    padding-left: 50px;
+  }
+
+  &.symbol--suffix input {
+    padding-right: 50px;
+  }
+}
+
+.input-symbol--prefix,
+.input-symbol--suffix {
+  position: absolute;
+  bottom: 0;
+  border: 0 solid $c-lightest-grey;
+  padding: 14px 16px 13px;
+  margin-bottom: 1px;
+  font-size: 14px;
+  color: $c-darker-grey;
+}
+
+.input-symbol--prefix {
+  left: 0;
+  border-right-width: 1px;
+}
+
+.input-symbol--suffix {
+  right: 0;
+  border-left-width: 1px;
+}

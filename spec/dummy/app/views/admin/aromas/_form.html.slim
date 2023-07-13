@@ -1,0 +1,36 @@
+ruby:
+  form_options = {
+    html: {
+      multipart: true,
+      novalidate: true,
+      class: 'js-file-form',
+      remote: true,
+      data: {
+        type: "html",
+        form_manager_model: @item.fae_form_manager_model_name,
+        form_manager_info: (@form_manager.present? ? @form_manager.to_json : nil)
+      }
+    }
+  }
+= simple_form_for([:admin, @item], form_options) do |f|
+  = fae_input f, :name, input_class: 'slugger'
+  = fae_input f, :slug, helper_text: 'default'
+  = fae_input f, :description
+  = fae_input f, :live
+  = fae_image_form f, :image
+  = f.hidden_field :release_id
+  = fae_association f, :cats, helper_text: "Select from existing categories, or <a href=\"/admin/cats/new\" id=\"cats\" class=\"js-fae-modal\">add new cat via modal popup</a>.".html_safe
+
+
+  = f.submit
+  = button_tag 'Cancel', type: 'button', class: 'js-cancel-nested cancel-nested-button'
+
+  - if Fae.use_form_manager
+    a.button.js-launch-form-manager href='#' = t('fae.form.launch_form_manager')
+
+- if params[:action] == 'edit'
+  #sub_aromas.nested-form
+    == render 'fae/shared/nested_table',
+      assoc: :sub_aromas,
+      parent_item: @item,
+      cols: [:name]

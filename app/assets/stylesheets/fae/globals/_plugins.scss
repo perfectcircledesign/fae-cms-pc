@@ -1,0 +1,51 @@
+// plugin overrides
+.chosen-container-single .chosen-single abbr,
+.chosen-container-single .chosen-single div b,
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close
+.chosen-rtl .chosen-search, .chosen-container-single .chosen-search {
+  background: none;
+
+  &:after {
+    @include icon-stuff;
+    content: fae-icon(arrow_down);
+    position: relative;
+    font-size: 4px;
+    top: -4px;
+    left: 2px;
+    color: $c-darker-grey;
+  }
+}
+
+.chosen-container-single .chosen-single {
+  &:hover {
+    div b:after {
+      color: $c-darkest-grey;
+    }
+  }
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single div b {
+  &:after {
+    content: fae-icon(arrow_up);
+    color: $c-darkest-grey;
+  }
+}
+
+.chosen-rtl .chosen-search, .chosen-container-single .chosen-search {
+  &:after {
+    content: fae-icon(search);
+    font-size: 12px;
+    left: auto;
+    right: 17px;
+    top: -1px;
+  }
+}
+
+.chosen-rtl,
+.chosen-container-single {
+  .chosen-search {
+    input[type="text"] {
+      background: none;
+    }
+  }
+}

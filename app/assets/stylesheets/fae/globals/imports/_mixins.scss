@@ -1,0 +1,58 @@
+//////////////////////////////
+// Project Specific Mixins
+//////////////////////////////
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin right-triangle($size: 15px, $color: $c-black) {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: $size $size 0 0;
+  border-color: $color transparent transparent transparent;
+}
+
+@mixin user-select($val){
+  -webkit-user-select: $val; /* Chrome all / Safari all */
+  -moz-user-select: $val; /* Firefox all */
+  -ms-user-select: $val; /* IE 10+ */
+  user-select: $val;
+}
+
+@mixin transform($value){
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
+@mixin gradient-vertical($start-color: $c-light-button, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-gradient(linear, left $start-percent, left $end-percent, from($start-color), to($end-color));
+  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);
+  background-image:  -moz-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0);
+}
+
+// quick mixin for using icon font in :before :after
+@mixin icon-stuff {
+  font-family: 'icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,73 @@
+// All buttons
+
+input[type=submit],
+button[type=button],
+.add-button,
+.button {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 11px 14px;
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.deploy .button {
+  margin-right: 10px;
+}
+
+// Dark buttons
+
+input[type=submit],
+.add-button {
+  @include gradient-vertical($start-color: $c-dark-button-gradient-start, $end-color: $c-dark-button-gradient-end);
+  color: $c-dark-button;
+  border-color: $c-dark-button-gradient-start;
+
+  &:hover {
+    background: $c-dark-button-gradient-end;
+    color: $c-white;
+  }
+}
+
+.add-button {
+  &:before {
+    @include icon-stuff;
+    content: fae-icon(heavy_plus);
+    font-size: 12px;
+    margin-right: 7px;
+  }
+}
+
+// Light buttons
+
+button[type=button],
+.button {
+  @include gradient-vertical($start-color: $c-light-button-gradient-start, $end-color: $c-light-button-gradient-end);
+  color: $c-light-button;
+  border-color: $c-border;
+
+  &:hover {
+    background: $c-light-button-gradient-end;
+  }
+
+  &:disabled {
+    background: $c-light-button-gradient-end;
+    color: $c-mid-grey;
+    border-color: $c-grey;
+    cursor: wait;
+  }
+}
+
+.button {
+  &.-small {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 3px;
+
+    &:hover {
+      color: $c-light-button;
+    }
+  }
+}

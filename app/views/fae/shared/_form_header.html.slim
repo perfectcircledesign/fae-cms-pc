@@ -1,0 +1,48 @@
+ruby:
+  require_locals ['header'], local_assigns
+  save_button_text          ||= t('fae.form.save')
+  cancel_button_text        ||= t('fae.form.cancel')
+  cloneable                 ||= false
+  clone_button_text         ||= t('fae.form.clone')
+  launch_manager_text       ||= t('fae.form.launch_form_manager')
+  subnav                    ||= []
+  header_as_string          = header.is_a?(String) ? header : header.class.name.split('::').last
+  header_as_string          = header_as_string.singularize
+  title                     ||= "#{params[:action]} #{header_as_string}".titleize
+  breadcrumb                = !local_assigns[:breadcrumbs].eql?(false)
+  languages                 ||= false
+  show_flash_messages       = !local_assigns[:show_flash_messages].eql?(false)
+
+header.content-header.js-content-header
+  - if breadcrumb
+    == render 'breadcrumb', title: title
+  - else
+    = form_header header
+
+  .content-header-buttons
+    - if languages
+      - selected = current_user.language || ''
+
+      .content-header-select
+        = select_tag 'fae-languages', options_for_select(Fae.languages.map(&:reverse), selected), id: 'js-language', class: 'small_pulldown', prompt: 'All Languages'
+
+    - if Fae.use_form_manager
+      a.button.js-launch-form-manager href='#' = launch_manager_text
+
+    a.button#js-header-cancel href=@index_path = cancel_button_text
+    - if cloneable.present? && params[:id].present?
+      a.button#js-header-clone data-method="post" href="#{@index_path}?from_existing=#{params[:id]}" = clone_button_text
+    input name="commit" type="submit" value=save_button_text
+
+  - if subnav.present?
+    ul.content-header-subnav#js-content-header-subnav
+      - subnav.each do |link, id_selector|
+        - subnav_item = link.is_a?(Array) ? link : [link, link.parameterize(separator: '_')]
+        li: a href="##{subnav_item[1]}" = subnav_item[0]
+
+- if show_flash_messages
+  == render 'fae/shared/errors'
+
+.errors-bar-wrapper
+  h2 = t('fae.save_error')
+  .errors-bar

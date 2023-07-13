@@ -1,0 +1,103 @@
+.hinter-clicker {
+  @include transition(color .2s);
+  margin-left: 5px;
+  cursor: pointer;
+  color: $c-darker-grey;
+
+  &:hover {
+    color: $c-text-heavy;
+  }
+
+  &.hovered {
+    position: relative;
+    z-index: 10000;
+  }
+}
+
+.simplemodal-overlay {
+  background: $c-modal-overlay-bg;
+}
+
+.simplemodal-container {
+  position: relative;
+  background: $c-modal-bg;
+  color: $c-darker-grey;
+  padding: 20px;
+  line-height: 1.5;
+  font-size: 13px;
+  box-shadow: 0 3px 8px 0 $c-box-shadow;
+
+  h3 {
+    color: $c-white;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  h4 {
+    color: $c-white;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  p {
+    margin-bottom: 15px;
+
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  table {
+    width: calc(100% + 40px);
+    margin: 20px -20px -20px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+}
+
+.simplemodal-close {
+  display: block;
+  height: 10px;
+
+  &:before {
+    @include icon-stuff;
+    content: fae-icon(delete_x);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $c-white;
+    cursor: pointer;
+    font-size: 12px;
+  }
+}
+
+#fae-modal {
+  padding: 0;
+  box-shadow: none;
+
+  .simplemodal-data {
+    min-height: 100%;
+  }
+
+  .simplemodal-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+
+    &:before {
+      position: relative;
+      padding: 4px;
+      top: auto;
+      right: auto;
+      color: #3b3b3b;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+= simple_form_for @item, html: {'data-form-manager-model' => @item.fae_form_manager_model_name, 'data-form-manager-model-id' => @item.fae_form_manager_model_id, 'data-form-manager-info' => (@form_manager.present? ? @form_manager.to_json : nil)}, url: fae.update_content_block_path(slug: @item.slug), method: :put do |f|
+  == render 'fae/shared/form_header', header: @item, f: f
+
+  main.content
+    = fae_input f, :title
+    = fae_content_form f, :header
+    = fae_content_form f, :hero
+    = fae_content_form f, :email
+    = fae_content_form f, :phone
+    = fae_content_form f, :cell_phone, label: false
+    = fae_content_form f, :work_phone, label: ''
+    = fae_content_form f, :introduction
+    = fae_content_form f, :introduction_2, markdown: true
+    = fae_content_form f, :phone, input_options: { input_html: { class: 'phone-mask' } }, helper_text: 'Numbers only, do not format', label: 'Phone #'
+    = fae_content_form f, :body, input_options: { input_html: { class: 'some-cool-class' } }, markdown: true
+    = fae_image_form f, :hero_image
+    = fae_file_form f, :welcome_pdf
+
+== render 'fae/shared/recent_changes'

@@ -1,0 +1,64 @@
+// slider wrapper for the yes/no switcher
+.slider-wrapper {
+  display: block;
+  position: relative;
+  width: 50px;
+  border-radius: 15px;
+  height: 25px;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  background: $c-light-grey;
+  transition: background-color 0.24s;
+  &:hover, &:focus {
+    background-color: $c-mid-grey;
+  }
+  &.slider-yes-selected {
+    background: var(--highlight-color);
+  }
+}
+
+.slider-options {
+  @include transition(left .24s);
+  white-space: nowrap;
+}
+
+.slider-option-selector {
+  display: block;
+  position: absolute;
+  width: 50%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 100%;
+  border: 1px solid $c-mid-grey;
+  transition: left 0.24s;
+  .slider-yes-selected & {
+    left: 50%;
+  }
+  background: $c-white;
+}
+
+.slider-option-no,
+.slider-option-yes {
+  position: absolute;
+  height: 0;
+  width: 0;
+  left: -200vw;
+}
+
+.slider-option-no {
+  display:block;
+  .slider-yes-selected & {
+    display: none;
+  }
+}
+
+.slider-option-yes {
+  display: none;
+  .slider-yes-selected & {
+    display:block;
+  }
+}

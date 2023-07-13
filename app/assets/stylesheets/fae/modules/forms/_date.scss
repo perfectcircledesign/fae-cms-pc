@@ -1,0 +1,351 @@
+// special treatment for date groupings
+// current order is year month day
+.input.date {
+  select {
+    min-width: 50px;
+
+    $date-widths: 100px, 200px, 75px;
+
+    @for $i from 1 through length($date-widths) {
+      &:nth-of-type(#{$i}),
+      .ie-select-#{$i} {
+        width: nth($date-widths, $i);
+      }
+    }
+  }
+
+  //specific chosen stuff for dates
+  .chosen-container {
+    margin-right: 10px;
+  }
+}
+
+.daterangepicker-seperator {
+  margin: 0 15px;
+}
+
+// DATEPICKER
+// DatePicker Container
+.ui-datepicker {
+  @extend %table-reset;
+  width: 216px;
+  height: auto;
+  margin: 5px auto 0;
+  font: 9pt Arial, sans-serif;
+  box-shadow: 0 0 10px 0 $c-box_shadow;
+
+  a {
+    text-decoration: none;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    @include gradient-vertical($start-color: $c-near-white, $end-color: $c-content-header-bg);
+    background-color: $c-near-white;
+    border-bottom: 1px solid $c-border;
+  }
+
+  th {
+    text-transform: uppercase;
+    font-size: 6pt;
+    padding: 5px 0;
+    color: $c-mid-dark-grey;
+    text-align: center;
+    background: none;
+    font-weight: normal;
+  }
+
+  tbody {
+    td {
+      padding: 0;
+      border-right: 1px solid $c-border;
+
+      &:last-child {
+        border-right: 0px;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid $c-border;
+
+      &:last-child {
+        border-bottom: 0px;
+      }
+    }
+  }
+
+  td {
+    span,
+    a {
+      display: inline-block;
+      font-weight: bold;
+      text-align: center;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      color: $c-mid-dark-grey;
+    }
+  }
+}
+
+
+.ui-datepicker-header {
+  background: $c-darkest-grey;
+  color: $c-white;
+  font-weight: bold;
+  line-height: 30px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: $c-mid-grey;
+
+  box-shadow: 0 1px 1px 0 $c-box_shadow;
+}
+
+.ui-datepicker-title {
+  text-align: center;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  color: $c-white;
+
+  .ui-icon {
+    display: none;
+  }
+}
+
+.ui-datepicker-prev {
+  float: left;
+
+  &:before {
+    @include icon-stuff;
+    content: fae-icon(chevron_left);
+  }
+}
+
+.ui-datepicker-next {
+  float: right;
+
+  &:before {
+    @include icon-stuff;
+    content: fae-icon(chevron_right);
+  }
+}
+
+.ui-datepicker-calendar .ui-state-default {
+  @include gradient-vertical($start-color: $c-lightest-grey, $end-color: darken($c-lightest-grey, 4%));
+  background-color: $c-lightest-grey;
+  box-shadow: 1px 1px 0 0 $c-box_shadow;
+}
+
+.ui-datepicker-calendar {
+  .ui-state-hover {
+    color: var(--highlight-color);
+  }
+
+  .ui-state-active {
+    background: var(--highlight-color);
+    color: $c-white;
+    position: relative;
+  }
+
+  td {
+    &:first-child {
+      .ui-state-active {
+        width: 29px;
+        margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      .ui-state-active {
+        width: 29px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  tr {
+    &:last-child {
+      .ui-state-active {
+        height: 29px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.ui-datepicker-unselectable .ui-state-default {
+  background: $c-near-white;
+  color: $c-mid-grey;
+}
+
+.datepicker {
+  position: relative;
+  width: 240px;
+
+  input[type=text] {
+    padding-right: 40px;
+    width: 100%;
+  }
+
+  label:before {
+    @include icon-stuff;
+    content: fae-icon(calendar);
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    padding: 12px;
+    font-size: 19px;
+    color: $c-darker-grey;
+
+  }
+
+  &.table-filter-group {
+    width: 130px;
+
+    input[type=text] {
+      border-radius: 0;
+    }
+
+    label:before {
+      right: -5px;
+      bottom: -6px;
+
+      font-size: 15px;
+    }
+  }
+}
+
+// Daterange picker
+// This looks whack and overly specific, but it's because it's overriding the vendor styles
+.date-picker {
+  font-family: inherit;
+}
+
+.date-picker-wrapper {
+  @extend %table-reset;
+  box-shadow: 0 0 10px 0 $c-box_shadow;
+  background: $c-mid-grey;
+  font-family: inherit;
+  padding: 0;
+  width: 380px;
+  border: 0;
+  margin-top: 5px;
+
+  &.no-shortcuts {
+    padding-bottom: 0;
+  }
+
+  th {
+    background: none;
+    color: inherit;
+  }
+
+  .month-wrapper {
+    background-color: $c-mid-grey;
+    border: 0;
+    padding: 0;
+
+    table {
+      table-layout: fixed;
+      font-weight: bold;
+
+      .caption {
+        background: $c-darkest-grey;
+        color: $c-white;
+        height: 30px;
+        font-weight: bold;
+
+        .prev,
+        .next {
+          @include icon-stuff;
+          color: $c-darkest-grey;
+
+          &:hover {
+            background: none;
+
+            &:before {
+              color: $c-mid-dark-grey;
+            }
+          }
+        }
+
+        .next {
+          &:before {
+            content: fae-icon(chevron_right);
+            color: $c-white;
+          }
+        }
+
+        .prev {
+          &:before {
+            content: fae-icon(chevron_left);
+            color: $c-white;
+          }
+        }
+      }
+
+      .week-name {
+        background: $c-white;
+        border-bottom: 1px solid $c-border;
+        color: $c-darkest-grey;
+        line-height: 1;
+        font-weight: 400;
+
+        th {
+          font-size: 6pt;
+          text-transform: uppercase;
+          color: $c-mid-dark-grey;
+        }
+      }
+
+      .day {
+        @include gradient-vertical($start-color: $c-lightest-grey, $end-color: darken($c-lightest-grey, 4%));
+        height: 30px;
+        padding: 6px;
+        border-right: 1px solid $c-border;
+
+        &.lastMonth,
+        &.nextMonth {
+          background: $c-white;
+          color: $c-mid-grey;
+        }
+
+        &.checked,
+        &.toMonth.valid.checked {
+          background: var(--highlight-color);
+          color: $c-white;
+        }
+
+        &.real-today.checked {
+          background: var(--highlight-color);
+        }
+      }
+
+      div.day {
+        &.lastMonth,
+        &.nextMonth {
+          color: $c-mid-grey;
+        }
+      }
+    }
+  }
+
+  .drp_top-bar {
+    display: none;
+  }
+
+  .gap {
+    display: none !important; //overrides JS display: block;
+  }
+}
